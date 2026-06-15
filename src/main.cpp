@@ -36,19 +36,21 @@ int main(){
 
     Jugador miNave(375.f, 500.f); //Creamos una instancia de la clase Jugador para representar la nave del jugador, posicionada inicialmente en el centro inferior de la ventana
     std::vector<bala> balas; //Creamos el vector "bala"
-    std::vector<enemigo> listaEnemigo; //Creamos el vector para generar enemigos
     
+    //Generamos los enemigos
+    std::vector<enemigo> listaEnemigo; //Creamos el vector para generar enemigos
     for(int i = 0; i < 6; i++){
         float posicionX = 0.f + (i * 70.f);
         float posicionY = 50.f;
         listaEnemigo.push_back(enemigo(posicionX, posicionY));//Agregamos enemigos a la lista de enemigos, posicionados en la parte superior de la ventana
     }
+    
+    //Cargamos el sonido de explosion
     sf::SoundBuffer bufferExplosion; //Buffer para el sonido de explosion
     sf::Sound sonidoExplosion; //Sonido de explosion
     if(!bufferExplosion.loadFromFile("../assets/explosion.wav")) {
         std::cerr << "Error al cargar el sonido explosion.wav\n";
     }
-
     sonidoExplosion.setBuffer(bufferExplosion);
     sonidoExplosion.setVolume(40.f); //Ajustamos el volumen del sonido de explosion
 
