@@ -5,7 +5,7 @@ Jugador::Jugador(float x, float y){
     forma.setFillColor(sf::Color::Cyan); //Definimos el color del jugador
     forma.setPosition(x, y); //Posicionamos al jugador en la ventana
     velocidad = 5.0f; //Definimos la velocidad de movimiento del jugador
-    tiempoBullet = 0.3f;
+    tiempoBullet = 0.3f; //Definimos el tiempo de disparo entre balas
 }
 
 void Jugador::actualizar(std::vector<bala>& listaBala){
@@ -41,11 +41,11 @@ void Jugador::actualizar(std::vector<bala>& listaBala){
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::X)){
-        if(relojDisparo.getElapsedTime().asSeconds() >= tiempoBullet){
-            float centroX = (forma.getPosition().x) + (forma.getSize().x / 2) - 4.f;
-            float topeY = forma.getPosition().y;
+        if(relojDisparo.getElapsedTime().asSeconds() >= tiempoBullet){ //Si el tiempo entre balas es correcto, entonces creamos la bala
+            float centroX = (forma.getPosition().x) + (forma.getSize().x / 2) - 4.f; //Creamos la bala desde el centro del jugador
+            float topeY = forma.getPosition().y; //Definimos el tope de la bala hacia arriba
 
-            listaBala.push_back(bala(centroX, topeY));
+            listaBala.push_back(bala(centroX, topeY)); //Si la bal asale de la ventana, la "matamos"
             relojDisparo.restart();
         }
     }

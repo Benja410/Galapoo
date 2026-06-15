@@ -33,7 +33,7 @@ int main(){
     textoInstruccion.setPosition(190, 200); // Posicionamos el texto de instruccion debajo del titulo, para que quede centrado
 
     Jugador miNave(375.f, 500.f); //Creamos una instancia de la clase Jugador para representar la nave del jugador, posicionada inicialmente en el centro inferior de la ventana
-    std::vector<bala> balas;
+    std::vector<bala> balas; //Creamos el vector "bala"
 
     while(window.isOpen()){ // Bucle principal del juego
         sf::Event event; // Variable para almacenar los eventos de la ventana
@@ -56,11 +56,11 @@ int main(){
         if(estadoActual == JUGANDO){ // Actualizamos la lógica del juego solo si estamos en el estado de JUGANDO
             miNave.actualizar(balas); // Actualizamos la posición del jugador según las teclas presionadas
             
-            for (size_t i = 0; i < balas.size(); i++){
+            for (size_t i = 0; i < balas.size(); i++){ //Generamos la bala
                 balas[i].actualizar();
             }
 
-            for (int i = balas.size() - 1; i >= 0; i--){
+            for (int i = balas.size() - 1; i >= 0; i--){ //Si la bala sale de la ventana, la eliminamos
                 if(balas[i].outVentana()){
                     balas.erase(balas.begin() + i);
                 }
@@ -75,13 +75,9 @@ int main(){
             window.draw(textoInstruccion); 
         }
         else if (estadoActual == JUGANDO){ // Aquí se pueden agregar los elementos gráficos del juego.
-            sf::RectangleShape naveTemporal(sf::Vector2f(50, 50)); //Nave temporal para el testeo incial
-            naveTemporal.setFillColor(sf::Color::Cyan); //Color de la nave temporal
-            naveTemporal.setPosition(100, 100); //Posicionamos la nave temporal en la ventana, para que quede visible y podamos verificar que se dibuje correctamente
-            window.draw(naveTemporal); //Dibujamos la nave temporal en la ventana
             miNave.dibujar(window); // Dibujamos al jugador en la ventana
             
-            for(size_t i = 0; i < balas.size(); i++){
+            for(size_t i = 0; i < balas.size(); i++){ //Dibujamos la bala en la ventana
                 balas[i].dibujar(window);
             }
         }
