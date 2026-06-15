@@ -1,0 +1,3 @@
+/home/benjaminsolis/Galapoo/build/CMakeFiles/Galapoo.dir
+/home/benjaminsolis/Galapoo/build/CMakeFiles/edit_cache.dir
+/home/benjaminsolis/Galapoo/build/CMakeFiles/rebuild_cache.dir
