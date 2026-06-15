@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "jugador.hpp"
 
 enum EstadoJuego{ //Definimos los estados del juego
     MENU,
@@ -29,6 +30,8 @@ int main(){
     textoInstruccion.setFillColor(sf::Color::Green); //Color del texto de instruccion
     textoInstruccion.setPosition(190, 200); // Posicionamos el texto de instruccion debajo del titulo, para que quede centrado
 
+    Jugador miNave(375.f, 500.f); //Creamos una instancia de la clase Jugador para representar la nave del jugador, posicionada inicialmente en el centro inferior de la ventana
+
     while(window.isOpen()){ // Bucle principal del juego
         sf::Event event; // Variable para almacenar los eventos de la ventana
 
@@ -46,8 +49,9 @@ int main(){
                 }
             }
         }
-        if(estadoActual == JUGANDO){
-            // Aquí se pueden agregar las actualizaciones del juego, como movimiento de personajes, colisiones, etc.
+
+        if(estadoActual == JUGANDO){ // Actualizamos la lógica del juego solo si estamos en el estado de JUGANDO
+            miNave.actualizar(); // Actualizamos la posición del jugador según las teclas presionadas
         }
 
         window.clear(sf::Color::Black); // Limpiamos la ventana con un color de fondo
@@ -61,6 +65,7 @@ int main(){
             naveTemporal.setFillColor(sf::Color::Cyan); //Color de la nave temporal
             naveTemporal.setPosition(100, 100); //Posicionamos la nave temporal en la ventana, para que quede visible y podamos verificar que se dibuje correctamente
             window.draw(naveTemporal); //Dibujamos la nave temporal en la ventana
+            miNave.dibujar(window); // Dibujamos al jugador en la ventana
         }
 
         window.display(); // Mostramos el contenido de la ventana después de dibujar los elementos correspondientes al estado actual del juego

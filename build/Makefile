@@ -129,6 +129,30 @@ Galapoo/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/build
 .PHONY : Galapoo/fast
 
+src/jugador.o: src/jugador.cpp.o
+.PHONY : src/jugador.o
+
+# target to build an object file
+src/jugador.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/jugador.cpp.o
+.PHONY : src/jugador.cpp.o
+
+src/jugador.i: src/jugador.cpp.i
+.PHONY : src/jugador.i
+
+# target to preprocess a source file
+src/jugador.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/jugador.cpp.i
+.PHONY : src/jugador.cpp.i
+
+src/jugador.s: src/jugador.cpp.s
+.PHONY : src/jugador.s
+
+# target to generate assembly for a file
+src/jugador.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/jugador.cpp.s
+.PHONY : src/jugador.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Galapoo"
+	@echo "... src/jugador.o"
+	@echo "... src/jugador.i"
+	@echo "... src/jugador.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

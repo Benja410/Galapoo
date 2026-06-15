@@ -85,12 +85,12 @@ clean: CMakeFiles/Galapoo.dir/clean
 CMakeFiles/Galapoo.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/benjaminsolis/Galapoo/build/CMakeFiles --progress-num=1,2 "Built target Galapoo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/benjaminsolis/Galapoo/build/CMakeFiles --progress-num=1,2,3 "Built target Galapoo"
 .PHONY : CMakeFiles/Galapoo.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Galapoo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/benjaminsolis/Galapoo/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/benjaminsolis/Galapoo/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Galapoo.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/benjaminsolis/Galapoo/build/CMakeFiles 0
 .PHONY : CMakeFiles/Galapoo.dir/rule
@@ -102,7 +102,7 @@ Galapoo: CMakeFiles/Galapoo.dir/rule
 # codegen rule for target.
 CMakeFiles/Galapoo.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/benjaminsolis/Galapoo/build/CMakeFiles --progress-num=1,2 "Finished codegen for target Galapoo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/benjaminsolis/Galapoo/build/CMakeFiles --progress-num=1,2,3 "Finished codegen for target Galapoo"
 .PHONY : CMakeFiles/Galapoo.dir/codegen
 
 # clean rule for target.

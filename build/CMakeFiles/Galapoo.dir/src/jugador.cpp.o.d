@@ -1,5 +1,6 @@
-CMakeFiles/Galapoo.dir/src/main.cpp.o: \
- /home/benjaminsolis/Galapoo/src/main.cpp /usr/include/stdc-predef.h \
+CMakeFiles/Galapoo.dir/src/jugador.cpp.o: \
+ /home/benjaminsolis/Galapoo/src/jugador.cpp /usr/include/stdc-predef.h \
+ /home/benjaminsolis/Galapoo/src/../include/jugador.hpp \
  /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
  /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
  /usr/include/SFML/System/Clock.hpp /usr/include/SFML/System/Export.hpp \
@@ -219,6 +220,4 @@ CMakeFiles/Galapoo.dir/src/main.cpp.o: \
  /usr/include/SFML/Graphics/Glsl.hpp /usr/include/SFML/Graphics/Glsl.inl \
  /usr/include/SFML/Graphics/Sprite.hpp \
  /usr/include/SFML/Graphics/Text.hpp \
- /usr/include/SFML/Graphics/VertexBuffer.hpp /usr/include/c++/15/iostream \
- /usr/include/c++/15/istream /usr/include/c++/15/bits/istream.tcc \
- /home/benjaminsolis/Galapoo/include/jugador.hpp
+ /usr/include/SFML/Graphics/VertexBuffer.hpp
