@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 #include "../include/bala.hpp"
 
@@ -11,7 +12,10 @@ class Jugador{
         sf::Clock relojDisparo;
         float tiempoBullet; //Tiempo de disparo
 
-    public:
+        sf::SoundBuffer bufferDisparo; //Buffer para el sonido de disparo
+        sf::Sound sonidoDisparo; //Sonido de disparo
+
+        public:
         Jugador(float x, float y); //Constructor de la clase jugador
         void actualizar(std::vector<bala>& listaBala);//Función para actualizar la posición del jugador
         void dibujar(sf::RenderWindow& ventana); //Función para dibujar al jugador en la ventana    

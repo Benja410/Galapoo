@@ -8,6 +8,7 @@ Galapoo: \
   CMakeFiles/Galapoo.dir/src/enemigo.cpp.o \
   /usr/lib64/libsfml-graphics.so.2.6.2 \
   /usr/lib64/libsfml-window.so.2.6.2 \
+  /usr/lib64/libsfml-audio.so.2.6.2 \
   /usr/lib64/libsfml-system.so.2.6.2 \
   /usr/lib/gcc/x86_64-redhat-linux/15/libstdc++.so \
   /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/libm.so \
@@ -40,6 +41,12 @@ Galapoo: \
   /usr/lib64/libXrandr.so.2 \
   /usr/lib64/libXcursor.so.1 \
   /usr/lib64/libudev.so.1 \
+  /usr/lib64/libopenal.so.1 \
+  /usr/lib64/libvorbisenc.so.2 \
+  /usr/lib64/libvorbisfile.so.3 \
+  /usr/lib64/libvorbis.so.0 \
+  /usr/lib64/libogg.so.0 \
+  /usr/lib64/libFLAC.so.14 \
   /lib64/ld-linux-x86-64.so.2 \
   /usr/lib64/libz.so.1 \
   /usr/lib64/libbz2.so.1 \
@@ -51,6 +58,7 @@ Galapoo: \
   /usr/lib64/libXrender.so.1 \
   /usr/lib64/libXfixes.so.3 \
   /usr/lib64/libcap.so.2 \
+  /usr/lib64/libfmt.so.11 \
   /usr/lib64/libglib-2.0.so.0 \
   /usr/lib64/libgraphite2.so.3 \
   /usr/lib64/libbrotlicommon.so.1 \
@@ -74,6 +82,8 @@ CMakeFiles/Galapoo.dir/src/enemigo.cpp.o:
 /usr/lib64/libsfml-graphics.so.2.6.2:
 
 /usr/lib64/libsfml-window.so.2.6.2:
+
+/usr/lib64/libsfml-audio.so.2.6.2:
 
 /usr/lib64/libsfml-system.so.2.6.2:
 
@@ -139,6 +149,18 @@ CMakeFiles/Galapoo.dir/src/enemigo.cpp.o:
 
 /usr/lib64/libudev.so.1:
 
+/usr/lib64/libopenal.so.1:
+
+/usr/lib64/libvorbisenc.so.2:
+
+/usr/lib64/libvorbisfile.so.3:
+
+/usr/lib64/libvorbis.so.0:
+
+/usr/lib64/libogg.so.0:
+
+/usr/lib64/libFLAC.so.14:
+
 /lib64/ld-linux-x86-64.so.2:
 
 /usr/lib64/libz.so.1:
@@ -160,6 +182,8 @@ CMakeFiles/Galapoo.dir/src/enemigo.cpp.o:
 /usr/lib64/libXfixes.so.3:
 
 /usr/lib64/libcap.so.2:
+
+/usr/lib64/libfmt.so.11:
 
 /usr/lib64/libglib-2.0.so.0:
 

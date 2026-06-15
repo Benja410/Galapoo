@@ -1,4 +1,5 @@
 #include "../include/jugador.hpp"
+#include <iostream>
 
 Jugador::Jugador(float x, float y){
     forma.setSize(sf::Vector2f(50.f, 50.f)); //Definimos el tamaño del jugador
@@ -6,6 +7,13 @@ Jugador::Jugador(float x, float y){
     forma.setPosition(x, y); //Posicionamos al jugador en la ventana
     velocidad = 5.0f; //Definimos la velocidad de movimiento del jugador
     tiempoBullet = 0.3f; //Definimos el tiempo de disparo entre balas
+    
+    if (!bufferDisparo.loadFromFile("../assets/bala.wav")) {
+        std::cerr << "Error al cargar el sonido bala.wav\n";
+    }
+
+    sonidoDisparo.setBuffer(bufferDisparo); //Asignamos el buffer al sonido de disparo
+    sonidoDisparo.setVolume(50.f); //Ajustamos el volumen del sonido de disparo
 }
 
 void Jugador::actualizar(std::vector<bala>& listaBala){
@@ -46,6 +54,7 @@ void Jugador::actualizar(std::vector<bala>& listaBala){
             float topeY = forma.getPosition().y; //Definimos el tope de la bala hacia arriba
 
             listaBala.push_back(bala(centroX, topeY)); //Si la bal asale de la ventana, la "matamos"
+            sonidoDisparo.play(); //Reproducimos el sonido de disparo
             relojDisparo.restart();
         }
     }

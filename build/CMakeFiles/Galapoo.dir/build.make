@@ -146,6 +146,7 @@ Galapoo: CMakeFiles/Galapoo.dir/build.make
 Galapoo: CMakeFiles/Galapoo.dir/compiler_depend.ts
 Galapoo: /usr/lib64/libsfml-graphics.so.2.6.2
 Galapoo: /usr/lib64/libsfml-window.so.2.6.2
+Galapoo: /usr/lib64/libsfml-audio.so.2.6.2
 Galapoo: /usr/lib64/libsfml-system.so.2.6.2
 Galapoo: CMakeFiles/Galapoo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/benjaminsolis/Galapoo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Galapoo"

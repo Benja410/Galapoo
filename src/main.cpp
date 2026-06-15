@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <vector>
 #include "jugador.hpp"
@@ -36,11 +37,20 @@ int main(){
     Jugador miNave(375.f, 500.f); //Creamos una instancia de la clase Jugador para representar la nave del jugador, posicionada inicialmente en el centro inferior de la ventana
     std::vector<bala> balas; //Creamos el vector "bala"
     std::vector<enemigo> listaEnemigo; //Creamos el vector para generar enemigos
+    
     for(int i = 0; i < 6; i++){
         float posicionX = 0.f + (i * 70.f);
         float posicionY = 50.f;
         listaEnemigo.push_back(enemigo(posicionX, posicionY));//Agregamos enemigos a la lista de enemigos, posicionados en la parte superior de la ventana
     }
+    sf::SoundBuffer bufferExplosion; //Buffer para el sonido de explosion
+    sf::Sound sonidoExplosion; //Sonido de explosion
+    if(!bufferExplosion.loadFromFile("../assets/explosion.wav")) {
+        std::cerr << "Error al cargar el sonido explosion.wav\n";
+    }
+
+    sonidoExplosion.setBuffer(bufferExplosion);
+    sonidoExplosion.setVolume(40.f); //Ajustamos el volumen del sonido de explosion
 
     while(window.isOpen()){ // Bucle principal del juego
         sf::Event event; // Variable para almacenar los eventos de la ventana
@@ -101,6 +111,7 @@ int main(){
                     if(listaEnemigo[i].hitbox().intersects(balas[j].hitbox())){ //Si la hitbox de la bala intersecta con la hitbox del enemigo, eliminamos ambos
                         listaEnemigo[i].vida -= 1; //Restamos 1 a la vida del enemigo
                         if(listaEnemigo[i].vida <= 0){ //Si la vida del enemigo es 0 o menor, lo eliminamos
+                            sonidoExplosion.play(); //Reproducimos el sonido de explosion
                             listaEnemigo.erase(listaEnemigo.begin() + i);
                         }
                         balas.erase(balas.begin() + j);
