@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-enum EstadoJuego{
+enum EstadoJuego{ //Definimos los estados del juego
     MENU,
     JUGANDO,
     PAUSA,
@@ -10,39 +10,38 @@ enum EstadoJuego{
 
 int main(){
 
-    sf::RenderWindow window(sf::VideoMode(1080, 720), "Galapoo - Proyecto ELO329");
-    window.setFramerateLimit(60);
+    sf::RenderWindow window(sf::VideoMode(1080, 720), "Galapoo - Proyecto ELO329"); //Definimos el tamaño de la ventana y el titulo de esta
+    window.setFramerateLimit(60); // Fijamos los fps a 60
 
-    EstadoJuego estadoActual = MENU;
-    sf::Font font;
+    EstadoJuego estadoActual = MENU; // Inicializamos el estado del juego en el menú
+    sf::Font font; //Cargamos la fuente para el texto del menú
 
-    if(!font.loadFromFile("../assets/ARCADE_I.TTF")){
+    if(!font.loadFromFile("../assets/ARCADE_I.TTF")){ //Debugger para verificar que la fuente se cargue
         std::cout << "Error al cargar la fuente" << std::endl;
         return -1;
     }
 
-    sf::Text textoTitulo("GALAPOO", font, 80);
-    textoTitulo.setFillColor(sf::Color::White);
-    textoTitulo.setPosition(275, 100);
+    sf::Text textoTitulo("GALAPOO", font, 80); //Definimos el titulo del menu, junto a su fuente y tamaño
+    textoTitulo.setFillColor(sf::Color::White); // Definimos el color del texto del titulo
+    textoTitulo.setPosition(275, 100); // Posicionamos el texto del titulo en la ventana, para que quede centrado
 
-    sf::Text textoInstruccion("Presiona ENTER para jugar", font, 30);
-    textoInstruccion.setFillColor(sf::Color::Green);
+    sf::Text textoInstruccion("Presiona ENTER para jugar", font, 30); //Definimos el texto de instruccion para el menu, junto a su fuente y tamaño
+    textoInstruccion.setFillColor(sf::Color::Green); //Color del texto de instruccion
+    textoInstruccion.setPosition(190, 200); // Posicionamos el texto de instruccion debajo del titulo, para que quede centrado
 
-    textoInstruccion.setPosition(190, 200);
+    while(window.isOpen()){ // Bucle principal del juego
+        sf::Event event; // Variable para almacenar los eventos de la ventana
 
-    while(window.isOpen()){
-        sf::Event event;
-
-        while(window.pollEvent(event)){
-            if(event.type == sf::Event::Closed){
+        while(window.pollEvent(event)){ // Bucle para manejar los eventos de la ventana
+            if(event.type == sf::Event::Closed){ //Debugger para verificar que la ventana se cierre correctamente
                 window.close();
             }
             
-            if(event.type == sf::Event::KeyPressed){
-                if(estadoActual == MENU && event.key.code == sf::Keyboard::Enter){
+            if(event.type == sf::Event::KeyPressed){ // Manejamos los eventos de teclado para cambiar entre estados del juego
+                if(estadoActual == MENU && event.key.code == sf::Keyboard::Enter){ //Debugger para verificar que se presione la tecla correcta
                     estadoActual = JUGANDO;
                 }
-                else if(estadoActual == JUGANDO && event.key.code == sf::Keyboard::Escape){
+                else if(estadoActual == JUGANDO && event.key.code == sf::Keyboard::Escape){ //Boton "emergencia" para volver al menu desde el juego
                     estadoActual = MENU;
                 }
             }
@@ -51,20 +50,20 @@ int main(){
             // Aquí se pueden agregar las actualizaciones del juego, como movimiento de personajes, colisiones, etc.
         }
 
-        window.clear(sf::Color::Black);
+        window.clear(sf::Color::Black); // Limpiamos la ventana con un color de fondo
         
         if (estadoActual == MENU){ // Aquí se pueden agregar animaciones o efectos para el menú
             window.draw(textoTitulo);
             window.draw(textoInstruccion); 
         }
-        else if (estadoActual == JUGANDO){
-            sf::RectangleShape naveTemporal(sf::Vector2f(50, 50));
-            naveTemporal.setFillColor(sf::Color::Cyan);
-            naveTemporal.setPosition(100, 100);
-            window.draw(naveTemporal);
+        else if (estadoActual == JUGANDO){ // Aquí se pueden agregar los elementos gráficos del juego.
+            sf::RectangleShape naveTemporal(sf::Vector2f(50, 50)); //Nave temporal para el testeo incial
+            naveTemporal.setFillColor(sf::Color::Cyan); //Color de la nave temporal
+            naveTemporal.setPosition(100, 100); //Posicionamos la nave temporal en la ventana, para que quede visible y podamos verificar que se dibuje correctamente
+            window.draw(naveTemporal); //Dibujamos la nave temporal en la ventana
         }
 
-        window.display();
+        window.display(); // Mostramos el contenido de la ventana después de dibujar los elementos correspondientes al estado actual del juego
         
     }
     return 0;
