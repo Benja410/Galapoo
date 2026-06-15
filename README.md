@@ -58,7 +58,7 @@ El proyecto utiliza CMake para generar los archivos de construcción (Makefiles)
 
 El código fuente está organizado de la siguiente manera para mantener una separación clara de responsabilidades:
 Plaintext
-
+```text
 GalagaOOP/
 ├── assets/           # Recursos multimedia (fuentes .ttf, sprites .png)
 ├── include/          # Archivos de cabecera (.hpp / .h) - Declaración de clases
@@ -66,6 +66,7 @@ GalagaOOP/
 │   └── main.cpp      # Punto de entrada y Máquina de Estados principal
 ├── CMakeLists.txt    # Configuración de compilación para CMake
 └── README.md         # Documentación del proyecto
+```
 
 ## Controles del Juego
 
@@ -73,14 +74,3 @@ GalagaOOP/
 
     ESC: Volver al menú de inicio.
 
-    (Próximamente) Flechas Direccionales: Mover la nave del jugador.
-
-    (Próximamente) Espacio: Disparar láseres.
-
-## Autores
-
-    [Tu Nombre/Usuario]
-
-    [Nombre de tu Compañero/Usuario]
-
-Desarrollado para el ramo de programación y diseño de software.
