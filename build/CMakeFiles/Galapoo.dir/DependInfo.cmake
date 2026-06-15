@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/benjaminsolis/Galapoo/src/bala.cpp" "CMakeFiles/Galapoo.dir/src/bala.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/bala.cpp.o.d"
   "/home/benjaminsolis/Galapoo/src/jugador.cpp" "CMakeFiles/Galapoo.dir/src/jugador.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/jugador.cpp.o.d"
   "/home/benjaminsolis/Galapoo/src/main.cpp" "CMakeFiles/Galapoo.dir/src/main.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/main.cpp.o.d"
   "" "Galapoo" "gcc" "CMakeFiles/Galapoo.dir/link.d"

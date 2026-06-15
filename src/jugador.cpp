@@ -5,9 +5,10 @@ Jugador::Jugador(float x, float y){
     forma.setFillColor(sf::Color::Cyan); //Definimos el color del jugador
     forma.setPosition(x, y); //Posicionamos al jugador en la ventana
     velocidad = 5.0f; //Definimos la velocidad de movimiento del jugador
+    tiempoBullet = 0.3f;
 }
 
-void Jugador::actualizar(){
+void Jugador::actualizar(std::vector<bala>& listaBala){
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
         forma.move(-velocidad, 0.f); //Movemos al jugador hacia la izquierda
@@ -37,6 +38,16 @@ void Jugador::actualizar(){
     }
     else if(posicion.y + forma.getSize().y > 720){ //Verificamos que el jugador no se salga por abajo
         forma.setPosition(posicion.x, 720 - forma.getSize().y);
+    }
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::X)){
+        if(relojDisparo.getElapsedTime().asSeconds() >= tiempoBullet){
+            float centroX = (forma.getPosition().x) + (forma.getSize().x / 2) - 4.f;
+            float topeY = forma.getPosition().y;
+
+            listaBala.push_back(bala(centroX, topeY));
+            relojDisparo.restart();
+        }
     }
 
 }

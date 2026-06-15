@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 #include "jugador.hpp"
+#include "bala.hpp"
 
 enum EstadoJuego{ //Definimos los estados del juego
     MENU,
@@ -31,6 +33,7 @@ int main(){
     textoInstruccion.setPosition(190, 200); // Posicionamos el texto de instruccion debajo del titulo, para que quede centrado
 
     Jugador miNave(375.f, 500.f); //Creamos una instancia de la clase Jugador para representar la nave del jugador, posicionada inicialmente en el centro inferior de la ventana
+    std::vector<bala> balas;
 
     while(window.isOpen()){ // Bucle principal del juego
         sf::Event event; // Variable para almacenar los eventos de la ventana
@@ -51,7 +54,18 @@ int main(){
         }
 
         if(estadoActual == JUGANDO){ // Actualizamos la lógica del juego solo si estamos en el estado de JUGANDO
-            miNave.actualizar(); // Actualizamos la posición del jugador según las teclas presionadas
+            miNave.actualizar(balas); // Actualizamos la posición del jugador según las teclas presionadas
+            
+            for (size_t i = 0; i < balas.size(); i++){
+                balas[i].actualizar();
+            }
+
+            for (int i = balas.size() - 1; i >= 0; i--){
+                if(balas[i].outVentana()){
+                    balas.erase(balas.begin() + i);
+                }
+            }
+            
         }
 
         window.clear(sf::Color::Black); // Limpiamos la ventana con un color de fondo
@@ -66,6 +80,10 @@ int main(){
             naveTemporal.setPosition(100, 100); //Posicionamos la nave temporal en la ventana, para que quede visible y podamos verificar que se dibuje correctamente
             window.draw(naveTemporal); //Dibujamos la nave temporal en la ventana
             miNave.dibujar(window); // Dibujamos al jugador en la ventana
+            
+            for(size_t i = 0; i < balas.size(); i++){
+                balas[i].dibujar(window);
+            }
         }
 
         window.display(); // Mostramos el contenido de la ventana después de dibujar los elementos correspondientes al estado actual del juego
