@@ -1,19 +1,18 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <vector>
-#include "../include/bala.hpp"
 
-class Jugador{
+
+class enemigo{
     private:
         sf::RectangleShape forma; //Forma del jugador, en este caso un rectángulo
         float velocidad; //Velocidad de movimiento del jugador
-
-        sf::Clock relojDisparo;
         float tiempoBullet; //Tiempo de disparo
+        int direccion; 
 
     public:
-        Jugador(float x, float y); //Constructor de la clase jugador
-        void actualizar(std::vector<bala>& listaBala);//Función para actualizar la posición del jugador
+        enemigo(float x, float y); //Constructor de la clase jugador
+        void actualizar();//Función para actualizar la posición del jugador
         void dibujar(sf::RenderWindow& ventana); //Función para dibujar al jugador en la ventana    
-
+        sf::FloatRect hitbox() const;
+        int vida;
 };

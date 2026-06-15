@@ -18,3 +18,7 @@ void bala::dibujar(sf::RenderWindow& ventana){ //Funcion para dibujar la bala en
 bool bala::outVentana() const {
     return (bullet.getPosition().y + (bullet.getRadius() * 2) < 0);
 }
+
+sf::FloatRect bala::hitbox() const{
+    return bullet.getGlobalBounds();
+}

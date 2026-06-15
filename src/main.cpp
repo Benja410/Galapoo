@@ -3,6 +3,7 @@
 #include <vector>
 #include "jugador.hpp"
 #include "bala.hpp"
+#include "enemigo.hpp"
 
 enum EstadoJuego{ //Definimos los estados del juego
     MENU,
@@ -34,6 +35,12 @@ int main(){
 
     Jugador miNave(375.f, 500.f); //Creamos una instancia de la clase Jugador para representar la nave del jugador, posicionada inicialmente en el centro inferior de la ventana
     std::vector<bala> balas; //Creamos el vector "bala"
+    std::vector<enemigo> listaEnemigo; //Creamos el vector para generar enemigos
+    for(int i = 0; i < 6; i++){
+        float posicionX = 0.f + (i * 70.f);
+        float posicionY = 50.f;
+        listaEnemigo.push_back(enemigo(posicionX, posicionY));//Agregamos enemigos a la lista de enemigos, posicionados en la parte superior de la ventana
+    }
 
     while(window.isOpen()){ // Bucle principal del juego
         sf::Event event; // Variable para almacenar los eventos de la ventana
@@ -55,9 +62,13 @@ int main(){
 
         if(estadoActual == JUGANDO){ // Actualizamos la lógica del juego solo si estamos en el estado de JUGANDO
             miNave.actualizar(balas); // Actualizamos la posición del jugador según las teclas presionadas
-            
+
             for (size_t i = 0; i < balas.size(); i++){ //Generamos la bala
                 balas[i].actualizar();
+            }
+
+            for(size_t i = 0; i < listaEnemigo.size(); i++){
+                listaEnemigo[i].actualizar();
             }
 
             for (int i = balas.size() - 1; i >= 0; i--){ //Si la bala sale de la ventana, la eliminamos
@@ -80,8 +91,26 @@ int main(){
             for(size_t i = 0; i < balas.size(); i++){ //Dibujamos la bala en la ventana
                 balas[i].dibujar(window);
             }
+
+            for(size_t i = 0; i < listaEnemigo.size(); i++){
+                listaEnemigo[i].dibujar(window);
+            }
+
+            for(int i = listaEnemigo.size() - 1; i >= 0; i--){
+                for(int j = balas.size() - 1; j >= 0; j--){
+                    if(listaEnemigo[i].hitbox().intersects(balas[j].hitbox())){ //Si la hitbox de la bala intersecta con la hitbox del enemigo, eliminamos ambos
+                        listaEnemigo[i].vida -= 1; //Restamos 1 a la vida del enemigo
+                        if(listaEnemigo[i].vida <= 0){ //Si la vida del enemigo es 0 o menor, lo eliminamos
+                            listaEnemigo.erase(listaEnemigo.begin() + i);
+                        }
+                        balas.erase(balas.begin() + j);
+                        break;
+                    }
+                }
+            }
         }
 
+        
         window.display(); // Mostramos el contenido de la ventana después de dibujar los elementos correspondientes al estado actual del juego
         
     }

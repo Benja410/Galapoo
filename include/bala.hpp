@@ -12,5 +12,6 @@ class bala{ //Definimos la clase bala
         void dibujar(sf::RenderWindow& ventana); //Función para dibujar la bala en la ventana
 
         bool outVentana() const; //Booleano que verifica si la bala sale de la ventana.
+        sf::FloatRect hitbox() const; //Función para obtener la hitbox de la bala
 
 };

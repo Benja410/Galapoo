@@ -153,6 +153,30 @@ src/bala.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/bala.cpp.s
 .PHONY : src/bala.cpp.s
 
+src/enemigo.o: src/enemigo.cpp.o
+.PHONY : src/enemigo.o
+
+# target to build an object file
+src/enemigo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/enemigo.cpp.o
+.PHONY : src/enemigo.cpp.o
+
+src/enemigo.i: src/enemigo.cpp.i
+.PHONY : src/enemigo.i
+
+# target to preprocess a source file
+src/enemigo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/enemigo.cpp.i
+.PHONY : src/enemigo.cpp.i
+
+src/enemigo.s: src/enemigo.cpp.s
+.PHONY : src/enemigo.s
+
+# target to generate assembly for a file
+src/enemigo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/enemigo.cpp.s
+.PHONY : src/enemigo.cpp.s
+
 src/jugador.o: src/jugador.cpp.o
 .PHONY : src/jugador.o
 
@@ -213,6 +237,9 @@ help:
 	@echo "... src/bala.o"
 	@echo "... src/bala.i"
 	@echo "... src/bala.s"
+	@echo "... src/enemigo.o"
+	@echo "... src/enemigo.i"
+	@echo "... src/enemigo.s"
 	@echo "... src/jugador.o"
 	@echo "... src/jugador.i"
 	@echo "... src/jugador.s"
