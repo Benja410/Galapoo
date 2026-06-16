@@ -61,6 +61,15 @@ void Jugador::actualizar(std::vector<bala>& listaBala){
 
 }
 
+void Jugador::reiniciar(){
+    forma.setPosition(375.f, 500.f); //Reiniciamos la posición del jugador al centro inferior de la ventana
+    relojDisparo.restart(); //Reiniciamos el reloj de disparo para evitar que el jugador pueda disparar inmediatamente al reiniciar
+}
+
 void Jugador::dibujar(sf::RenderWindow& ventana){
     ventana.draw(forma); //Dibujamos al jugador en la ventana
+}
+
+sf::FloatRect Jugador::hitbox() const{
+    return forma.getGlobalBounds(); //Obtenemos la hitbox del jugador
 }

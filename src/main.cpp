@@ -26,13 +26,29 @@ int main(){
         return -1;
     }
 
+    //Definimos los textos para el menú, junto a su fuente, tamaño, color y posición
     sf::Text textoTitulo("GALAPOO", font, 80); //Definimos el titulo del menu, junto a su fuente y tamaño
     textoTitulo.setFillColor(sf::Color::White); // Definimos el color del texto del titulo
     textoTitulo.setPosition(275, 100); // Posicionamos el texto del titulo en la ventana, para que quede centrado
-
     sf::Text textoInstruccion("Presiona ENTER para jugar", font, 30); //Definimos el texto de instruccion para el menu, junto a su fuente y tamaño
     textoInstruccion.setFillColor(sf::Color::Green); //Color del texto de instruccion
     textoInstruccion.setPosition(190, 200); // Posicionamos el texto de instruccion debajo del titulo, para que quede centrado
+
+    //Definimos los textos para la pausa, junto a su fuente, tamaño, color y posición
+    sf::Text textoPausa("PAUSA", font, 100); //Definimos el texto de pausa, junto a su fuente y tamaño
+    textoPausa.setFillColor(sf::Color::Yellow); // Definimos el color del texto de pausa
+    textoPausa.setPosition(320, 100); // Posicionamos el texto de pausa en la ventana, para que quede centrado
+    sf::Text textoPausaInstruccion("Presiona C para continuar", font, 30); //Definimos el texto de instruccion para la pausa, junto a su fuente y tamaño
+    textoPausaInstruccion.setFillColor(sf::Color::Green); //Color del texto de instruccion para la pausa
+    textoPausaInstruccion.setPosition(190, 350); // Posicionamos el texto de instruccion para la pausa debajo del texto de pausa
+
+    //Definimos el texto de game over, junto a su fuente, tamaño, color y posición
+    sf::Text textoGameOver("GAME OVER", font, 100); //Definimos el texto de game over, junto a su fuente y tamaño
+    textoGameOver.setFillColor(sf::Color::Red); // Definimos el color del texto de game over
+    textoGameOver.setPosition(110, 100); // Posicionamos el texto de game over en la ventana, para que quede centrado
+    sf::Text textoReiniciar("Presiona M para volver al menu", font, 30); //Definimos el texto de instruccion para el menu, junto a su fuente y tamaño
+    textoReiniciar.setFillColor(sf::Color::Green); //Color del texto de instruccion
+    textoReiniciar.setPosition(120, 250);
 
     Jugador miNave(375.f, 500.f); //Creamos una instancia de la clase Jugador para representar la nave del jugador, posicionada inicialmente en el centro inferior de la ventana
     std::vector<bala> balas; //Creamos el vector "bala"
@@ -54,28 +70,60 @@ int main(){
     sonidoExplosion.setBuffer(bufferExplosion);
     sonidoExplosion.setVolume(40.f); //Ajustamos el volumen del sonido de explosion
 
-    while(window.isOpen()){ // Bucle principal del juego
-        sf::Event event; // Variable para almacenar los eventos de la ventana
+    while(window.isOpen()){ 
+        sf::Event event; 
 
-        while(window.pollEvent(event)){ // Bucle para manejar los eventos de la ventana
-            if(event.type == sf::Event::Closed){ //Debugger para verificar que la ventana se cierre correctamente
+        while(window.pollEvent(event)){ 
+            if(event.type == sf::Event::Closed){ 
                 window.close();
             }
             
-            if(event.type == sf::Event::KeyPressed){ // Manejamos los eventos de teclado para cambiar entre estados del juego
-                if(estadoActual == MENU && event.key.code == sf::Keyboard::Enter){ //Debugger para verificar que se presione la tecla correcta
+            if(event.type == sf::Event::KeyPressed){ 
+                if(estadoActual == MENU && event.key.code == sf::Keyboard::Enter){ 
                     estadoActual = JUGANDO;
                 }
-                else if(estadoActual == JUGANDO && event.key.code == sf::Keyboard::Escape){ //Boton "emergencia" para volver al menu desde el juego
+                else if(estadoActual == JUGANDO && event.key.code == sf::Keyboard::Escape){ 
+                    estadoActual = PAUSA;
+                }
+                else if(estadoActual == PAUSA && event.key.code == sf::Keyboard::C){ 
+                    estadoActual = JUGANDO;
+                }
+                else if(estadoActual == PAUSA && event.key.code == sf::Keyboard::M){ 
+                    miNave.reiniciar();
+                    balas.clear(); 
+                    listaEnemigo.clear(); 
+                    
+                    for(int i = 0; i < 6; i++){
+                        float posicionX = 0.f + (i * 70.f);
+                        float posicionY = 50.f;
+                        listaEnemigo.push_back(enemigo(posicionX, posicionY)); 
+                    }
+
                     estadoActual = MENU;
+                }
+                else if(estadoActual == GAMEOVER && event.key.code == sf::Keyboard::M){ 
+                    miNave.reiniciar();
+                    balas.clear(); 
+                    listaEnemigo.clear(); 
+                    
+                    for(int i = 0; i < 6; i++){
+                        float posicionX = 0.f + (i * 70.f);
+                        float posicionY = 50.f;
+                        listaEnemigo.push_back(enemigo(posicionX, posicionY)); 
+                    }
+                    
+                    estadoActual = MENU; 
                 }
             }
         }
 
-        if(estadoActual == JUGANDO){ // Actualizamos la lógica del juego solo si estamos en el estado de JUGANDO
-            miNave.actualizar(balas); // Actualizamos la posición del jugador según las teclas presionadas
+        // ==========================================
+        // ESTA ES LA SECCIÓN DE LÓGICA (ACTUALIZAR)
+        // ==========================================
+        if(estadoActual == JUGANDO){ 
+            miNave.actualizar(balas); 
 
-            for (size_t i = 0; i < balas.size(); i++){ //Generamos la bala
+            for (size_t i = 0; i < balas.size(); i++){ 
                 balas[i].actualizar();
             }
 
@@ -83,50 +131,74 @@ int main(){
                 listaEnemigo[i].actualizar();
             }
 
-            for (int i = balas.size() - 1; i >= 0; i--){ //Si la bala sale de la ventana, la eliminamos
+            // Limpieza de balas fuera de ventana
+            for (int i = balas.size() - 1; i >= 0; i--){ 
                 if(balas[i].outVentana()){
                     balas.erase(balas.begin() + i);
                 }
             }
-            
+
+            // --- SE TRASLADARON LAS COLISIONES AQUÍ (ZONA DE LÓGICA) ---
+            for(int i = listaEnemigo.size() - 1; i >= 0; i--){
+                bool enemigoBorrado = false; // Bandera para saber si el enemigo murió
+
+                // 1. Colisión Bala vs Enemigo
+                for(int j = balas.size() - 1; j >= 0; j--){
+                    if(listaEnemigo[i].hitbox().intersects(balas[j].hitbox())){ 
+                        listaEnemigo[i].vida -= 1; 
+                        
+                        if(listaEnemigo[i].vida <= 0){ 
+                            sonidoExplosion.play(); 
+                            listaEnemigo.erase(listaEnemigo.begin() + i);
+                            enemigoBorrado = true; // Marcamos que el enemigo ya no existe
+                        }
+                        balas.erase(balas.begin() + j);
+                        break; // Salimos del bucle de balas
+                    }
+                }
+
+                // 2. Colisión Nave vs Enemigo (SOLO si el enemigo sigue vivo)
+                if (!enemigoBorrado) {
+                    if(miNave.hitbox().intersects(listaEnemigo[i].hitbox())){ 
+                        estadoActual = GAMEOVER;
+                        break; // Salimos del bucle de enemigos porque el juego terminó
+                    }
+                }
+            }
         }
 
-        window.clear(sf::Color::Black); // Limpiamos la ventana con un color de fondo
+        // ==========================================
+        // ESTA ES LA SECCIÓN DE GRÁFICOS (DIBUJAR)
+        // ==========================================
+        window.clear(sf::Color::Black); 
         
-        if (estadoActual == MENU){ // Aquí se pueden agregar animaciones o efectos para el menú
+        if (estadoActual == MENU){ 
             window.draw(textoTitulo);
             window.draw(textoInstruccion); 
         }
-        else if (estadoActual == JUGANDO){ // Aquí se pueden agregar los elementos gráficos del juego.
-            miNave.dibujar(window); // Dibujamos al jugador en la ventana
+        else if (estadoActual == JUGANDO){ 
+            miNave.dibujar(window); 
             
-            for(size_t i = 0; i < balas.size(); i++){ //Dibujamos la bala en la ventana
+            for(size_t i = 0; i < balas.size(); i++){ 
                 balas[i].dibujar(window);
             }
 
             for(size_t i = 0; i < listaEnemigo.size(); i++){
                 listaEnemigo[i].dibujar(window);
             }
-
-            for(int i = listaEnemigo.size() - 1; i >= 0; i--){
-                for(int j = balas.size() - 1; j >= 0; j--){
-                    if(listaEnemigo[i].hitbox().intersects(balas[j].hitbox())){ //Si la hitbox de la bala intersecta con la hitbox del enemigo, eliminamos ambos
-                        listaEnemigo[i].vida -= 1; //Restamos 1 a la vida del enemigo
-                        if(listaEnemigo[i].vida <= 0){ //Si la vida del enemigo es 0 o menor, lo eliminamos
-                            sonidoExplosion.play(); //Reproducimos el sonido de explosion
-                            listaEnemigo.erase(listaEnemigo.begin() + i);
-                        }
-                        balas.erase(balas.begin() + j);
-                        break;
-                    }
-                }
-            }
+            // NOTA: Toda la lógica de colisiones fue removida de aquí para mantener limpio el renderizado
         }
-
+        else if(estadoActual == PAUSA){
+            window.draw(textoPausa);
+            window.draw(textoPausaInstruccion);
+            window.draw(textoReiniciar);
+        }
+        else if (estadoActual == GAMEOVER){ 
+            window.draw(textoGameOver);
+            window.draw(textoReiniciar);
+        }
         
-        window.display(); // Mostramos el contenido de la ventana después de dibujar los elementos correspondientes al estado actual del juego
-        
+        window.display(); 
     }
     return 0;
-    
 }

@@ -19,5 +19,7 @@ class Jugador{
         Jugador(float x, float y); //Constructor de la clase jugador
         void actualizar(std::vector<bala>& listaBala);//Función para actualizar la posición del jugador
         void dibujar(sf::RenderWindow& ventana); //Función para dibujar al jugador en la ventana    
+        void reiniciar();
+        sf::FloatRect hitbox() const; //Función para obtener la hitbox del jugador
 
 };
