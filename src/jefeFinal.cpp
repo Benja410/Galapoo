@@ -2,9 +2,9 @@
 
 jefeFinal::jefeFinal(float x, float y, const sf::Texture& textura) : enemigo(x,y, textura){
     vida = 50;
-    velocidad = 7.0f;
+    velocidad = 6.0f;
 
-    sprite.setScale(2.0f, 2.0f);
+    sprite.setScale(4.0f, 4.0f);
 
 }
 

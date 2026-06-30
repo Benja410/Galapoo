@@ -3,6 +3,7 @@
 
 Explosion::Explosion(float x, float y, const sf::Texture& textura){
     sprite.setTexture(textura);
+    sprite.setScale(2.0f, 2.0f);
     frameActual = 0;
     totalFrames = 5;
     tiempoFrame = 0.06f;

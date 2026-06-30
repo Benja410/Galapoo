@@ -7,4 +7,6 @@ class balaEnemiga : public bala{
         balaEnemiga(float x, float y);
         void actualizar() override;
         bool outVentana() const override;
+        void dibujar(sf::RenderWindow& ventana);
+        sf::FloatRect hitbox() const;
 };

@@ -3,6 +3,7 @@
 
 enemigo::enemigo(float x, float y, const sf::Texture& textura){
     sprite.setTexture(textura);
+    sprite.setScale(1.4f, 1.4f);
     sprite.setPosition(x, y);
     velocidad = 4.0f; //Definimos la velocidad de movimiento del jugador
     direccion = 1; //Definimos hacia donde se mueve el enemigo (1 derecha -1 Izquierda)
