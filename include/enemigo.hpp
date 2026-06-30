@@ -3,16 +3,18 @@
 
 
 class enemigo{
-    private:
-        sf::RectangleShape forma; //Forma del jugador, en este caso un rectángulo
+    protected:
+        sf::Sprite sprite; //Forma del jugador
         float velocidad; //Velocidad de movimiento del jugador
-        float tiempoBullet; //Tiempo de disparo
         int direccion; 
 
     public:
-        enemigo(float x, float y); //Constructor de la clase jugador
-        void actualizar();//Función para actualizar la posición del jugador
-        void dibujar(sf::RenderWindow& ventana); //Función para dibujar al jugador en la ventana    
-        sf::FloatRect hitbox() const;
         int vida;
+        enemigo(float x, float y, const sf::Texture& textura); //Constructor de la clase jugador
+
+        virtual ~enemigo() = default; //Destructor virtual
+        virtual void actualizar();//Función virtual para actualizar la posición del jugador
+        virtual void dibujar(sf::RenderWindow& ventana); //Función virtual para dibujar al jugador en la ventana    
+        sf::FloatRect hitbox() const;
+        
 };

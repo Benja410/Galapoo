@@ -177,6 +177,54 @@ src/enemigo.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/enemigo.cpp.s
 .PHONY : src/enemigo.cpp.s
 
+src/explosion.o: src/explosion.cpp.o
+.PHONY : src/explosion.o
+
+# target to build an object file
+src/explosion.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/explosion.cpp.o
+.PHONY : src/explosion.cpp.o
+
+src/explosion.i: src/explosion.cpp.i
+.PHONY : src/explosion.i
+
+# target to preprocess a source file
+src/explosion.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/explosion.cpp.i
+.PHONY : src/explosion.cpp.i
+
+src/explosion.s: src/explosion.cpp.s
+.PHONY : src/explosion.s
+
+# target to generate assembly for a file
+src/explosion.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/explosion.cpp.s
+.PHONY : src/explosion.cpp.s
+
+src/jefeFinal.o: src/jefeFinal.cpp.o
+.PHONY : src/jefeFinal.o
+
+# target to build an object file
+src/jefeFinal.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/jefeFinal.cpp.o
+.PHONY : src/jefeFinal.cpp.o
+
+src/jefeFinal.i: src/jefeFinal.cpp.i
+.PHONY : src/jefeFinal.i
+
+# target to preprocess a source file
+src/jefeFinal.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/jefeFinal.cpp.i
+.PHONY : src/jefeFinal.cpp.i
+
+src/jefeFinal.s: src/jefeFinal.cpp.s
+.PHONY : src/jefeFinal.s
+
+# target to generate assembly for a file
+src/jefeFinal.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Galapoo.dir/build.make CMakeFiles/Galapoo.dir/src/jefeFinal.cpp.s
+.PHONY : src/jefeFinal.cpp.s
+
 src/jugador.o: src/jugador.cpp.o
 .PHONY : src/jugador.o
 
@@ -240,6 +288,12 @@ help:
 	@echo "... src/enemigo.o"
 	@echo "... src/enemigo.i"
 	@echo "... src/enemigo.s"
+	@echo "... src/explosion.o"
+	@echo "... src/explosion.i"
+	@echo "... src/explosion.s"
+	@echo "... src/jefeFinal.o"
+	@echo "... src/jefeFinal.i"
+	@echo "... src/jefeFinal.s"
 	@echo "... src/jugador.o"
 	@echo "... src/jugador.i"
 	@echo "... src/jugador.s"

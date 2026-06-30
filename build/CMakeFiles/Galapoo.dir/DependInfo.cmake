@@ -10,6 +10,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/benjaminsolis/Galapoo/src/bala.cpp" "CMakeFiles/Galapoo.dir/src/bala.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/bala.cpp.o.d"
   "/home/benjaminsolis/Galapoo/src/enemigo.cpp" "CMakeFiles/Galapoo.dir/src/enemigo.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/enemigo.cpp.o.d"
+  "/home/benjaminsolis/Galapoo/src/explosion.cpp" "CMakeFiles/Galapoo.dir/src/explosion.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/explosion.cpp.o.d"
+  "/home/benjaminsolis/Galapoo/src/jefeFinal.cpp" "CMakeFiles/Galapoo.dir/src/jefeFinal.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/jefeFinal.cpp.o.d"
   "/home/benjaminsolis/Galapoo/src/jugador.cpp" "CMakeFiles/Galapoo.dir/src/jugador.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/jugador.cpp.o.d"
   "/home/benjaminsolis/Galapoo/src/main.cpp" "CMakeFiles/Galapoo.dir/src/main.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/main.cpp.o.d"
   "" "Galapoo" "gcc" "CMakeFiles/Galapoo.dir/link.d"

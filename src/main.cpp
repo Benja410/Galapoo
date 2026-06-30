@@ -5,6 +5,9 @@
 #include "jugador.hpp"
 #include "bala.hpp"
 #include "enemigo.hpp"
+#include "explosion.hpp"
+#include "jefeFinal.hpp"
+
 
 enum EstadoJuego{ //Definimos los estados del juego
     MENU,
@@ -13,6 +16,40 @@ enum EstadoJuego{ //Definimos los estados del juego
     GAMEOVER
 };
 
+void cargarNivel(int nivel, std::vector<enemigo*>& lista, const sf::Texture& texNormal, const sf::Texture& textJefe){
+    for(size_t i = 0; i < lista.size(); i++){
+        delete lista[i];
+    }
+    lista.clear();
+
+    if(nivel == 1){
+        for(int i = 0; i < 6; i++){
+            lista.push_back(new enemigo(50.f + (i * 80.f), 50.f, texNormal));
+
+        }
+    }else if(nivel ==2){
+        for(int fila = 0; fila < 2; fila++){
+            for(int i = 0; i < 6; i++){
+                lista.push_back(new enemigo(50.f + (i * 90.f), 50.f + (fila * 60.f), texNormal));
+            }
+        }
+    } else if (nivel == 3){
+        for(int i = 0; i<7; i++){
+            float offsetY = (i <= 3) ? (i * 40.f) : ((6-i) * 40.f);
+            lista.push_back(new enemigo(50.f + (i * 90.f), 50.f + offsetY, texNormal));
+            
+        }
+    } else if (nivel == 4){
+        for(int fila = 0; fila < 3; fila++){
+            for(int i = 0; i < 6; i++){
+                lista.push_back(new enemigo(40.f + (i * 80.f), 40.f + (fila * 50.f), texNormal));
+            }
+        }
+    } else if (nivel == 5){
+        lista.push_back(new jefeFinal(350.f, 50.f, textJefe));
+    }
+}
+
 int main(){
 
     sf::RenderWindow window(sf::VideoMode(1080, 720), "Galapoo - Proyecto ELO329"); //Definimos el tamaño de la ventana y el titulo de esta
@@ -20,6 +57,21 @@ int main(){
 
     EstadoJuego estadoActual = MENU; // Inicializamos el estado del juego en el menú
     sf::Font font; //Cargamos la fuente para el texto del menú
+
+    sf::Texture texturaExplosion;
+    if(!texturaExplosion.loadFromFile("../assets/explosion2.jpg")){ //Debugger para verificar que la imagen se cargue
+        std::cerr << "Error al cargar explosion.png\n";
+    }
+
+    sf::Texture texturaEnemigo;
+    if(!texturaEnemigo.loadFromFile("../assets/naveEnemiga.png")){
+        std::cerr << "Eror al cargar la nave.png\n";
+    }
+
+    sf::Texture texturaJefe;
+    if(!texturaJefe.loadFromFile("../assets/naveEnemiga.png")){
+        std::cerr << "Error al cargar la naveJefe.png\n";
+    }
 
     if(!font.loadFromFile("../assets/ARCADE_I.TTF")){ //Debugger para verificar que la fuente se cargue
         std::cout << "Error al cargar la fuente" << std::endl;
@@ -54,13 +106,13 @@ int main(){
     std::vector<bala> balas; //Creamos el vector "bala"
     
     //Generamos los enemigos
-    std::vector<enemigo> listaEnemigo; //Creamos el vector para generar enemigos
-    for(int i = 0; i < 6; i++){
-        float posicionX = 0.f + (i * 70.f);
-        float posicionY = 50.f;
-        listaEnemigo.push_back(enemigo(posicionX, posicionY));//Agregamos enemigos a la lista de enemigos, posicionados en la parte superior de la ventana
-    }
+    std::vector<enemigo* > listaEnemigo; //Creamos el vector para generar enemigos
+    int nivelActual = 1;
+    cargarNivel(nivelActual, listaEnemigo, texturaEnemigo, texturaJefe);
     
+    std::vector<Explosion> listaExplosiones; //Creamos el vector para gestionar explosiones
+    bool jugadorVivo = true; //Booleano para saber si el jugador esta con vida
+
     //Cargamos el sonido de explosion
     sf::SoundBuffer bufferExplosion; //Buffer para el sonido de explosion
     sf::Sound sonidoExplosion; //Sonido de explosion
@@ -92,25 +144,24 @@ int main(){
                     miNave.reiniciar();
                     balas.clear(); 
                     listaEnemigo.clear(); 
+                    jugadorVivo = true;
                     
-                    for(int i = 0; i < 6; i++){
-                        float posicionX = 0.f + (i * 70.f);
-                        float posicionY = 50.f;
-                        listaEnemigo.push_back(enemigo(posicionX, posicionY)); 
-                    }
+                    nivelActual = 1;
+                    cargarNivel(nivelActual, listaEnemigo, texturaEnemigo, texturaJefe);
 
                     estadoActual = MENU;
                 }
                 else if(estadoActual == GAMEOVER && event.key.code == sf::Keyboard::M){ 
                     miNave.reiniciar();
                     balas.clear(); 
-                    listaEnemigo.clear(); 
-                    
-                    for(int i = 0; i < 6; i++){
-                        float posicionX = 0.f + (i * 70.f);
-                        float posicionY = 50.f;
-                        listaEnemigo.push_back(enemigo(posicionX, posicionY)); 
+                    for(size_t i = 0; i < listaEnemigo.size(); i++){
+                        delete listaEnemigo[i];
                     }
+                    listaEnemigo.clear(); 
+                    jugadorVivo = true;
+                    
+                    nivelActual = 1;
+                    cargarNivel(nivelActual, listaEnemigo, texturaEnemigo, texturaJefe);
                     
                     estadoActual = MENU; 
                 }
@@ -121,14 +172,17 @@ int main(){
         // ESTA ES LA SECCIÓN DE LÓGICA (ACTUALIZAR)
         // ==========================================
         if(estadoActual == JUGANDO){ 
-            miNave.actualizar(balas); 
+            if(jugadorVivo){ //Solo actualizamos si el jugador esta vivo
+                miNave.actualizar(balas); 
+            }
+
 
             for (size_t i = 0; i < balas.size(); i++){ 
                 balas[i].actualizar();
             }
 
             for(size_t i = 0; i < listaEnemigo.size(); i++){
-                listaEnemigo[i].actualizar();
+                listaEnemigo[i]->actualizar();
             }
 
             // Limpieza de balas fuera de ventana
@@ -138,17 +192,33 @@ int main(){
                 }
             }
 
+            for(size_t i =0; i < listaExplosiones.size(); i++){
+                listaExplosiones[i].actualizar();
+            }
+
+            for(int i = listaExplosiones.size() - 1; i>= 0; i--){
+                if (listaExplosiones[i].estaTerminada()){
+                    listaExplosiones.erase(listaExplosiones.begin() + i);
+                    if(!jugadorVivo){
+                        estadoActual = GAMEOVER;
+                    }
+                }
+            }
+
             // --- SE TRASLADARON LAS COLISIONES AQUÍ (ZONA DE LÓGICA) ---
             for(int i = listaEnemigo.size() - 1; i >= 0; i--){
                 bool enemigoBorrado = false; // Bandera para saber si el enemigo murió
 
                 // 1. Colisión Bala vs Enemigo
                 for(int j = balas.size() - 1; j >= 0; j--){
-                    if(listaEnemigo[i].hitbox().intersects(balas[j].hitbox())){ 
-                        listaEnemigo[i].vida -= 1; 
+                    if(listaEnemigo[i]->hitbox().intersects(balas[j].hitbox())){ 
+                        listaEnemigo[i]->vida -= 1; 
                         
-                        if(listaEnemigo[i].vida <= 0){ 
+                        if(listaEnemigo[i]->vida <= 0){ 
                             sonidoExplosion.play(); 
+                            sf::FloatRect bounds = listaEnemigo[i]->hitbox();
+                            listaExplosiones.push_back(Explosion(bounds.left + bounds.width/2.f, bounds.top + bounds.height/2.f, texturaExplosion));
+                            delete listaEnemigo[i];
                             listaEnemigo.erase(listaEnemigo.begin() + i);
                             enemigoBorrado = true; // Marcamos que el enemigo ya no existe
                         }
@@ -158,11 +228,29 @@ int main(){
                 }
 
                 // 2. Colisión Nave vs Enemigo (SOLO si el enemigo sigue vivo)
-                if (!enemigoBorrado) {
-                    if(miNave.hitbox().intersects(listaEnemigo[i].hitbox())){ 
-                        estadoActual = GAMEOVER;
+                if (!enemigoBorrado && jugadorVivo) {
+                    if(miNave.hitbox().intersects(listaEnemigo[i]->hitbox())){ 
+                        sonidoExplosion.play();
+                        sf::FloatRect bounds = miNave.hitbox(); //Explotamos al jugador antes de mandar a la pantalla del GAMEOVER
+                        listaExplosiones.push_back(Explosion(bounds.left + bounds.width/2.f, bounds.top + bounds.height/2.f, texturaExplosion));
+                        jugadorVivo = false;
                         break; // Salimos del bucle de enemigos porque el juego terminó
                     }
+                }
+            }
+             // =====================================
+             // SISTEMA DE AVANCE DE NIVELES
+             // =====================================
+            if(listaEnemigo.empty() && jugadorVivo){
+                nivelActual++;
+
+                if(nivelActual > 5){
+                    estadoActual = MENU;
+                    nivelActual = 1;
+                    cargarNivel(nivelActual, listaEnemigo, texturaEnemigo, texturaJefe);
+                }else{
+                    balas.clear();
+                    cargarNivel(nivelActual, listaEnemigo, texturaEnemigo, texturaJefe);
                 }
             }
         }
@@ -177,14 +265,20 @@ int main(){
             window.draw(textoInstruccion); 
         }
         else if (estadoActual == JUGANDO){ 
-            miNave.dibujar(window); 
+            if(jugadorVivo){
+                miNave.dibujar(window);
+            }
             
             for(size_t i = 0; i < balas.size(); i++){ 
                 balas[i].dibujar(window);
             }
 
             for(size_t i = 0; i < listaEnemigo.size(); i++){
-                listaEnemigo[i].dibujar(window);
+                listaEnemigo[i]->dibujar(window);
+            }
+
+            for(size_t i = 0; i < listaExplosiones.size(); i++){
+                listaExplosiones[i].dibujar(window);
             }
             // NOTA: Toda la lógica de colisiones fue removida de aquí para mantener limpio el renderizado
         }
