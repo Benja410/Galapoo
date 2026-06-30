@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/benjaminsolis/Galapoo/src/bala.cpp" "CMakeFiles/Galapoo.dir/src/bala.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/bala.cpp.o.d"
+  "/home/benjaminsolis/Galapoo/src/balaEnemiga.cpp" "CMakeFiles/Galapoo.dir/src/balaEnemiga.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/balaEnemiga.cpp.o.d"
   "/home/benjaminsolis/Galapoo/src/enemigo.cpp" "CMakeFiles/Galapoo.dir/src/enemigo.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/enemigo.cpp.o.d"
   "/home/benjaminsolis/Galapoo/src/explosion.cpp" "CMakeFiles/Galapoo.dir/src/explosion.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/explosion.cpp.o.d"
   "/home/benjaminsolis/Galapoo/src/jefeFinal.cpp" "CMakeFiles/Galapoo.dir/src/jefeFinal.cpp.o" "gcc" "CMakeFiles/Galapoo.dir/src/jefeFinal.cpp.o.d"

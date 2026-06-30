@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Galapoo.dir/link.d"
   "CMakeFiles/Galapoo.dir/src/bala.cpp.o"
   "CMakeFiles/Galapoo.dir/src/bala.cpp.o.d"
+  "CMakeFiles/Galapoo.dir/src/balaEnemiga.cpp.o"
+  "CMakeFiles/Galapoo.dir/src/balaEnemiga.cpp.o.d"
   "CMakeFiles/Galapoo.dir/src/enemigo.cpp.o"
   "CMakeFiles/Galapoo.dir/src/enemigo.cpp.o.d"
   "CMakeFiles/Galapoo.dir/src/explosion.cpp.o"

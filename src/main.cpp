@@ -2,11 +2,14 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <vector>
+#include <ctime>
+#include <cstdlib>
 #include "jugador.hpp"
 #include "bala.hpp"
 #include "enemigo.hpp"
 #include "explosion.hpp"
 #include "jefeFinal.hpp"
+#include "balaEnemiga.hpp"
 
 
 enum EstadoJuego{ //Definimos los estados del juego
@@ -51,6 +54,8 @@ void cargarNivel(int nivel, std::vector<enemigo*>& lista, const sf::Texture& tex
 }
 
 int main(){
+
+    srand(time(NULL));
 
     sf::RenderWindow window(sf::VideoMode(1080, 720), "Galapoo - Proyecto ELO329"); //Definimos el tamaño de la ventana y el titulo de esta
     window.setFramerateLimit(60); // Fijamos los fps a 60
@@ -104,6 +109,8 @@ int main(){
 
     Jugador miNave(375.f, 500.f); //Creamos una instancia de la clase Jugador para representar la nave del jugador, posicionada inicialmente en el centro inferior de la ventana
     std::vector<bala> balas; //Creamos el vector "bala"
+    std::vector<balaEnemiga> balasEnemigas; //Creames el vector "balaEnemiga"
+    sf::Clock relojDisparoEnemigo; //Controla cada cuanto tiempo intentara disparar
     
     //Generamos los enemigos
     std::vector<enemigo* > listaEnemigo; //Creamos el vector para generar enemigos
@@ -143,6 +150,7 @@ int main(){
                 else if(estadoActual == PAUSA && event.key.code == sf::Keyboard::M){ 
                     miNave.reiniciar();
                     balas.clear(); 
+                    balasEnemigas.clear();
                     listaEnemigo.clear(); 
                     jugadorVivo = true;
                     
@@ -154,6 +162,7 @@ int main(){
                 else if(estadoActual == GAMEOVER && event.key.code == sf::Keyboard::M){ 
                     miNave.reiniciar();
                     balas.clear(); 
+                    balasEnemigas.clear();
                     for(size_t i = 0; i < listaEnemigo.size(); i++){
                         delete listaEnemigo[i];
                     }
@@ -164,6 +173,7 @@ int main(){
                     cargarNivel(nivelActual, listaEnemigo, texturaEnemigo, texturaJefe);
                     
                     estadoActual = MENU; 
+
                 }
             }
         }
@@ -176,9 +186,12 @@ int main(){
                 miNave.actualizar(balas); 
             }
 
-
             for (size_t i = 0; i < balas.size(); i++){ 
                 balas[i].actualizar();
+            }
+
+            for (size_t i = 0; i < balasEnemigas.size(); i++){ 
+                balasEnemigas[i].actualizar();
             }
 
             for(size_t i = 0; i < listaEnemigo.size(); i++){
@@ -192,6 +205,12 @@ int main(){
                 }
             }
 
+            for (int i = balasEnemigas.size() - 1; i >= 0; i--){ 
+                if(balasEnemigas[i].outVentana()){
+                    balasEnemigas.erase(balasEnemigas.begin() + i);
+                }
+            }
+
             for(size_t i =0; i < listaExplosiones.size(); i++){
                 listaExplosiones[i].actualizar();
             }
@@ -202,6 +221,26 @@ int main(){
                     if(!jugadorVivo){
                         estadoActual = GAMEOVER;
                     }
+                }
+            }
+
+            // ===============================================
+            // LOGICA DE DISPARO ENEMIGO ALEATORIO POR NIVEL
+            // ===============================================
+            if(!listaEnemigo.empty() && jugadorVivo){
+                if(relojDisparoEnemigo.getElapsedTime().asSeconds() >= 0.6f){
+                    int probaDisparo = nivelActual *20;
+                    if((rand() % 100) < probaDisparo){
+                        int enemigoShooter = rand() % listaEnemigo.size();
+
+                        sf::FloatRect boundsEnemigo = listaEnemigo[enemigoShooter]->hitbox();
+                        float spawnX = boundsEnemigo.left + (boundsEnemigo.width / 2.f) - 5.f;
+                        float spawnY = boundsEnemigo.top + boundsEnemigo.height;
+
+                        balasEnemigas.push_back(balaEnemiga(spawnX, spawnY));
+
+                    }
+                    relojDisparoEnemigo.restart();
                 }
             }
 
@@ -235,6 +274,20 @@ int main(){
                         listaExplosiones.push_back(Explosion(bounds.left + bounds.width/2.f, bounds.top + bounds.height/2.f, texturaExplosion));
                         jugadorVivo = false;
                         break; // Salimos del bucle de enemigos porque el juego terminó
+                    }
+                }
+
+                if(jugadorVivo){
+                    for(int i = balasEnemigas.size() - 1; i >= 0; i--){
+                        if(miNave.hitbox().intersects(balasEnemigas[i].hitbox())){
+                            sonidoExplosion.play();
+                            sf::FloatRect bounds = miNave.hitbox();
+                            listaExplosiones.push_back(Explosion(bounds.left + bounds.width/2.f, bounds.top + bounds.height/2.f, texturaExplosion));
+
+                            jugadorVivo = false;
+                            balasEnemigas.erase(balasEnemigas.begin() + i);
+                            break;
+                        }
                     }
                 }
             }
@@ -279,6 +332,10 @@ int main(){
 
             for(size_t i = 0; i < listaExplosiones.size(); i++){
                 listaExplosiones[i].dibujar(window);
+            }
+
+            for(size_t i = 0; i < balasEnemigas.size(); i++){ 
+                balasEnemigas[i].dibujar(window);
             }
             // NOTA: Toda la lógica de colisiones fue removida de aquí para mantener limpio el renderizado
         }

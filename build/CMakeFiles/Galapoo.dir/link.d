@@ -8,6 +8,7 @@ Galapoo: \
   CMakeFiles/Galapoo.dir/src/enemigo.cpp.o \
   CMakeFiles/Galapoo.dir/src/explosion.cpp.o \
   CMakeFiles/Galapoo.dir/src/jefeFinal.cpp.o \
+  CMakeFiles/Galapoo.dir/src/balaEnemiga.cpp.o \
   /usr/lib64/libsfml-graphics.so.2.6.2 \
   /usr/lib64/libsfml-window.so.2.6.2 \
   /usr/lib64/libsfml-audio.so.2.6.2 \
@@ -84,6 +85,8 @@ CMakeFiles/Galapoo.dir/src/enemigo.cpp.o:
 CMakeFiles/Galapoo.dir/src/explosion.cpp.o:
 
 CMakeFiles/Galapoo.dir/src/jefeFinal.cpp.o:
+
+CMakeFiles/Galapoo.dir/src/balaEnemiga.cpp.o:
 
 /usr/lib64/libsfml-graphics.so.2.6.2:
 

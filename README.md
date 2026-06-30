@@ -7,9 +7,10 @@ Este proyecto fue construido con un enfoque estricto en la **Programación Orien
 ## Características
 
 * **Arquitectura basada en Clases:** Diseño modular que separa la lógica del juego, la renderización y la gestión de eventos.
-* **Máquina de Estados:** Gestión fluida entre la Pantalla de Inicio, el Bucle de Juego y (próximamente) la pantalla de Game Over.
-* **Gráficos en 2D:** Renderizado optimizado a 60 FPS mediante aceleración por hardware con SFML.
-* **Gestión de Recursos:** Carga segura de fuentes y texturas mediante rutas relativas.
+* **Herencia y Polimorfismo:** Enemigos estándar y un `jefeFinal` que heredan de una clase base `enemigo`, permitiendo comportamientos únicos y almacenamiento en un vector de punteros unificados.
+* **Sistema de Niveles Dinámicos:** 5 niveles de dificultad progresiva con distintas formaciones geométricas y un combate contra un Jefe Final en el útlimo nivel.
+* **Audio y Multimedia:** Renderizado optimizado a 60 FPS con texturas reales y efectos de sonidos espaciales (`sf::SoundBuffer` y `sf::Sound`)
+
 
 ## Tecnologías y Requisitos
 
@@ -52,25 +53,39 @@ El proyecto utiliza CMake para generar los archivos de construcción (Makefiles)
     Ejecuta el juego:
     Bash
 
-    ./Galaga
+    ./Galapoo
 
 ## Estructura del Proyecto
 
 El código fuente está organizado de la siguiente manera para mantener una separación clara de responsabilidades:
 Plaintext
 ```text
-GalagaOOP/
-├── assets/           # Recursos multimedia (fuentes .ttf, sprites .png)
-├── include/          # Archivos de cabecera (.hpp / .h) - Declaración de clases
-├── src/              # Archivos de código fuente (.cpp) - Implementación
-│   └── main.cpp      # Punto de entrada y Máquina de Estados principal
-├── CMakeLists.txt    # Configuración de compilación para CMake
-└── README.md         # Documentación del proyecto
+Galapoo/
+├── assets/               # Recursos multimedia (.png, .ttf, .wav)
+├── include/              # Cabeceras (.hpp) - Declaración de clases
+│   ├── bala.hpp
+│   ├── balaEnemiga.hpp
+│   ├── enemigo.hpp
+│   ├── explosion.hpp
+│   ├── jefeFinal.hpp
+│   └── jugador.hpp
+├── src/                  # Código fuente (.cpp) - Implementación
+│   ├── main.cpp          # Punto de entrada, gestor de niveles y Máquina de Estados
+│   ├── ... (Archivos .cpp correspondientes a cada clase)
+├── CMakeLists.txt        # Configuración de compilación para CMake
+└── README.md             # Documentación del proyecto
 ```
 
 ## Controles del Juego
 
-    ENTER: Iniciar el juego desde el menú principal.
+    Moverse: Flecha izquierda / Flecha Derecha
 
-    ESC: Volver al menú de inicio.
+    Disparar: X
 
+    Iniciar el Juego: ENTER
+
+    Pausar: ESC (Durante la partida)
+
+    Continuar: C (Durante el menu de pausa)
+
+    Volver al Menú / Reiniciar: M (Desde la pausa o la pantalla de Game Over)

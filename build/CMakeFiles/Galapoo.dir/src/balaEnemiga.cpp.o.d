@@ -1,5 +1,8 @@
-CMakeFiles/Galapoo.dir/src/main.cpp.o: \
- /home/benjaminsolis/Galapoo/src/main.cpp /usr/include/stdc-predef.h \
+CMakeFiles/Galapoo.dir/src/balaEnemiga.cpp.o: \
+ /home/benjaminsolis/Galapoo/src/balaEnemiga.cpp \
+ /usr/include/stdc-predef.h \
+ /home/benjaminsolis/Galapoo/src/../include/balaEnemiga.hpp \
+ /home/benjaminsolis/Galapoo/src/../include/bala.hpp \
  /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
  /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
  /usr/include/SFML/System/Clock.hpp /usr/include/SFML/System/Export.hpp \
@@ -219,28 +222,4 @@ CMakeFiles/Galapoo.dir/src/main.cpp.o: \
  /usr/include/SFML/Graphics/Glsl.hpp /usr/include/SFML/Graphics/Glsl.inl \
  /usr/include/SFML/Graphics/Sprite.hpp \
  /usr/include/SFML/Graphics/Text.hpp \
- /usr/include/SFML/Graphics/VertexBuffer.hpp /usr/include/SFML/Audio.hpp \
- /usr/include/SFML/Audio/InputSoundFile.hpp \
- /usr/include/SFML/Audio/Export.hpp /usr/include/SFML/Audio/Listener.hpp \
- /usr/include/SFML/Audio/Music.hpp \
- /usr/include/SFML/Audio/SoundStream.hpp \
- /usr/include/SFML/Audio/SoundSource.hpp \
- /usr/include/SFML/Audio/AlResource.hpp \
- /usr/include/SFML/Audio/OutputSoundFile.hpp \
- /usr/include/SFML/Audio/Sound.hpp \
- /usr/include/SFML/Audio/SoundBuffer.hpp /usr/include/c++/15/set \
- /usr/include/c++/15/bits/stl_set.h \
- /usr/include/c++/15/bits/stl_multiset.h \
- /usr/include/SFML/Audio/SoundBufferRecorder.hpp \
- /usr/include/SFML/Audio/SoundRecorder.hpp \
- /usr/include/SFML/Audio/SoundFileFactory.hpp \
- /usr/include/SFML/Audio/SoundFileFactory.inl \
- /usr/include/SFML/Audio/SoundFileReader.hpp \
- /usr/include/SFML/Audio/SoundFileWriter.hpp /usr/include/c++/15/iostream \
- /usr/include/c++/15/istream /usr/include/c++/15/bits/istream.tcc \
- /home/benjaminsolis/Galapoo/include/jugador.hpp \
- /home/benjaminsolis/Galapoo/include/../include/bala.hpp \
- /home/benjaminsolis/Galapoo/include/enemigo.hpp \
- /home/benjaminsolis/Galapoo/include/explosion.hpp \
- /home/benjaminsolis/Galapoo/include/jefeFinal.hpp \
- /home/benjaminsolis/Galapoo/include/balaEnemiga.hpp
+ /usr/include/SFML/Graphics/VertexBuffer.hpp
