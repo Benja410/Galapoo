@@ -88,4 +88,12 @@ Galapoo/
 
     Continuar: C (Durante el menu de pausa)
 
-    Volver al Menú / Reiniciar: M (Desde la pausa o la pantalla de Game Over)
+    Volver al Menú / Reiniciar: M (Desde la pausa o la pantalla de Game Over
+    
+## Link de video de presentación:
+https://usmcl-my.sharepoint.com/:v:/g/personal/bsolisl_usm_cl/IQA4rsdwZrjVQ7GPyLj94M2nAWn70A_QNIAplofVcytNvRA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=FtRWhl
+
+
+
+
+    
